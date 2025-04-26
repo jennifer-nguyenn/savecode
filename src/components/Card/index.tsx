@@ -11,7 +11,7 @@ interface CardProps {
 }
 
 interface RewardCardProps extends CardProps {
-  unlocked?: boolean;
+  $unlocked?: boolean;
 }
 
 export const OrderCard = styled.div<CardProps>`
@@ -21,34 +21,84 @@ export const OrderCard = styled.div<CardProps>`
   display: flex;
   flex-direction: column;
   gap: ${tokens.spacing.space1};
+  position: relative;
+  width: 167.5px;
+
+  @media (min-width: ${tokens.breakpoints.tablet}) {
+    width: 311px;
+  }
+
+  p {
+    color: ${tokens.colors.darkTextPrimary};
+  }
+
+  p[data-color="secondary"] {
+    color: ${tokens.colors.darkTextSecondary};
+  }
+
+  .order-count {
+    position: absolute;
+    top: ${tokens.spacing.space1};
+    right: ${tokens.spacing.space1};
+    width: 24px;
+    height: 24px;
+    background-color: ${tokens.colors.orderCountBg};
+    color: ${tokens.colors.darkTextPrimary};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: ${tokens.typography.sizes.small};
+    font-weight: ${tokens.typography.weights.bold};
+  }
+
+  .view-order {
+    margin-top: ${tokens.spacing.space2};
+    text-decoration: underline;
+    color: ${tokens.colors.darkTextPrimary};
+    font-weight: ${tokens.typography.weights.bold};
+    font-size: ${tokens.typography.sizes.small};
+    cursor: pointer;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 `;
 
 export const ItemCard = styled.div<CardProps>`
-  ${baseCardStyles}
-  background-color: ${tokens.colors.cardBackground};
-  color: ${tokens.colors.textPrimary};
+  background-color: transparent;
+  border-radius: ${tokens.borderRadius.radius2};
   overflow: hidden;
 
   .image-container {
     width: 100%;
-    padding-top: 56.25%; /* 16:9 aspect ratio */
     position: relative;
-    
-    img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    border-radius: ${tokens.borderRadius.radius2} ${tokens.borderRadius.radius2} 0 0;
+    overflow: hidden;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .content {
+    background-color: ${tokens.colors.textPrimary};
     padding: ${tokens.spacing.space2};
     display: flex;
     flex-direction: column;
     gap: ${tokens.spacing.space1};
+    border-radius: 0 0 ${tokens.borderRadius.radius2} ${tokens.borderRadius.radius2};
+
+    p {
+      color: ${tokens.colors.darkTextPrimary};
+    }
+
+    p[color="secondary"] {
+      color: ${tokens.colors.darkTextSecondary80};
+    }
   }
 `;
 
@@ -85,7 +135,7 @@ export const RewardCard = styled.div<RewardCardProps>`
   display: flex;
   flex-direction: column;
   gap: ${tokens.spacing.space2};
-  opacity: ${({ unlocked = false }) => (unlocked ? 1 : 0.7)};
+  opacity: ${({ $unlocked = false }) => ($unlocked ? 1 : 0.7)};
   transition: opacity 0.2s ease;
 
   &:hover {
@@ -105,4 +155,4 @@ export const RewardCard = styled.div<RewardCardProps>`
       transition: width 0.3s ease;
     }
   }
-`; 
+`;

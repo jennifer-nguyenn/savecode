@@ -72,4 +72,4 @@ export const Text = styled.p<TextProps>`
   font-weight: ${({ weight = 'medium' }) => tokens.typography.weights[weight]};
   color: ${({ color = 'primary' }) =>
     color === 'primary' ? tokens.colors.textPrimary : tokens.colors.textSecondary};
-`; 
+`;
