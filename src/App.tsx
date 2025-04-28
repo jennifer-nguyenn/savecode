@@ -14,8 +14,30 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import headerBg from './assets/game-header.jpg';
 
+const rewards = {
+  points: 10,
+  sales: 8,
+  unlocked: true,
+  progress: 1,
+};
+
+interface Order {
+  date: string;
+  time: string;
+  orderId: string;
+  count: number;
+}
+
+interface Item {
+  image: string;
+  name: string;
+  section: string;
+  row: string;
+  seat: string;
+}
+
 // Mock Data
-const orders = [
+const orders: Order[] = [
   {
     date: 'Aug 14, 2025',
     time: '2:32pm EST',
@@ -24,7 +46,7 @@ const orders = [
   },
 ];
 
-const items = [
+const items: Item[] = [
   {
     image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
     name: 'Super long name game',
@@ -41,13 +63,6 @@ const items = [
   },
 ];
 
-const rewards = {
-  points: 10,
-  sales: 8,
-  unlocked: true,
-  progress: 1,
-};
-
 const App: React.FC = () => {
   return (
     <div className="App" style={{ paddingBottom: 80 }}>
@@ -57,7 +72,8 @@ const App: React.FC = () => {
           position: 'relative',
           width: '100%',
           height: '400px',
-          backgroundImage: 'url(https://images.unsplash.com/photo-1577223625816-7546f13df25d?q=80&w=3540&auto=format&fit=crop)',
+          backgroundImage:
+            'url(https://images.unsplash.com/photo-1577223625816-7546f13df25d?q=80&w=3540&auto=format&fit=crop)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           marginBottom: tokens.spacing.space3,
@@ -71,7 +87,8 @@ const App: React.FC = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 70%, #111111 100%)',
+            background:
+              'linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 70%, #111111 100%)',
             zIndex: 1,
           }}
         />
@@ -139,11 +156,7 @@ const App: React.FC = () => {
                 height: '40px',
               }}
             >
-              <Text
-                variant="small"
-                weight="bold"
-                style={{ color: '#FFFFFF' }}
-              >
+              <Text variant="small" weight="bold" style={{ color: '#FFFFFF' }}>
                 View Order
               </Text>
             </button>
@@ -209,7 +222,10 @@ const App: React.FC = () => {
       </header>
 
       {/* Orders Section */}
-      <section className="content-container" style={{ marginBottom: tokens.spacing.space2 }}>
+      <section
+        className="content-container"
+        style={{ marginBottom: tokens.spacing.space2 }}
+      >
         <div
           style={{
             background: tokens.colors.cardBackground,
@@ -250,22 +266,30 @@ const App: React.FC = () => {
 
           {/* Your Items */}
           <div>
-            <div style={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              alignItems: 'center',
-              marginBottom: tokens.spacing.space2 
-            }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginBottom: tokens.spacing.space2,
+              }}
+            >
               <Text variant="regular" weight="bold">
                 Your Items
               </Text>
-              <div style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: tokens.spacing.space1 
-              }}>
-                <Text variant="regular" weight="bold">11</Text>
-                <ChevronRightIcon sx={{ width: 24, height: 24, fill: 'white' }} />
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: tokens.spacing.space1,
+                }}
+              >
+                <Text variant="regular" weight="bold">
+                  11
+                </Text>
+                <ChevronRightIcon
+                  sx={{ width: 24, height: 24, fill: 'white' }}
+                />
               </div>
             </div>
             <div style={{ marginRight: '-16px', width: 'calc(100% + 16px)' }}>
@@ -287,7 +311,11 @@ const App: React.FC = () => {
                       <img src={item.image} alt={item.name} />
                     </div>
                     <div className="content">
-                      <Text variant="regular" weight="bold" className="truncate">
+                      <Text
+                        variant="regular"
+                        weight="bold"
+                        className="truncate"
+                      >
                         {item.name}
                       </Text>
                       <Text variant="tiny">
@@ -296,7 +324,10 @@ const App: React.FC = () => {
                     </div>
                   </ItemCard>
                 ))}
-                <div style={{ minWidth: '8px', flex: '0 0 8px' }} aria-hidden="true" />
+                <div
+                  style={{ minWidth: '8px', flex: '0 0 8px' }}
+                  aria-hidden="true"
+                />
               </div>
             </div>
           </div>
@@ -328,12 +359,18 @@ const App: React.FC = () => {
               description="Sell tickets at your own price"
             />
             <ActionButton
-              icon={<OpenInNewIcon sx={{ width: 32, height: 32, fill: 'white' }} />}
+              icon={
+                <OpenInNewIcon sx={{ width: 32, height: 32, fill: 'white' }} />
+              }
               header="Transfers"
               description="Send tickets & items to anyone"
             />
             <ActionButton
-              icon={<ArrowCircleUpIcon sx={{ width: 32, height: 32, fill: 'white' }} />}
+              icon={
+                <ArrowCircleUpIcon
+                  sx={{ width: 32, height: 32, fill: 'white' }}
+                />
+              }
               header="Upgrade"
               description="Available upgrade offers"
             />
@@ -342,7 +379,10 @@ const App: React.FC = () => {
       </section>
 
       {/* Resale Section */}
-      <section className="content-container" style={{ marginBottom: tokens.spacing.space2 }}>
+      <section
+        className="content-container"
+        style={{ marginBottom: tokens.spacing.space2 }}
+      >
         <div
           style={{
             background: tokens.colors.cardBackground,
@@ -360,10 +400,16 @@ const App: React.FC = () => {
           </Text>
 
           <ActionButton
-            icon={<StorefrontIcon sx={{ width: 32, height: 32, fill: 'white' }} />}
+            icon={
+              <StorefrontIcon sx={{ width: 32, height: 32, fill: 'white' }} />
+            }
             header="Your listings"
             description="Manage your listings"
-            rightIcon={<ChevronRightIcon sx={{ width: 24, height: 24, fill: 'white', opacity: 0.7 }} />}
+            rightIcon={
+              <ChevronRightIcon
+                sx={{ width: 24, height: 24, fill: 'white', opacity: 0.7 }}
+              />
+            }
             onClick={() => console.log('Your listings clicked')}
           />
         </div>
@@ -403,7 +449,13 @@ const App: React.FC = () => {
           </div>
 
           {/* Rewards Carousel */}
-          <div style={{ marginRight: '-16px', width: 'calc(100% + 16px)', position: 'relative' }}>
+          <div
+            style={{
+              marginRight: '-16px',
+              width: 'calc(100% + 16px)',
+              position: 'relative',
+            }}
+          >
             <div
               style={{
                 display: 'flex',
@@ -413,7 +465,7 @@ const App: React.FC = () => {
                 gap: 0,
                 width: '100%',
                 scrollbarWidth: 'none',
-                paddingBottom: tokens.spacing.space2
+                paddingBottom: tokens.spacing.space2,
               }}
             >
               {/* Unlocked Reward Card */}
@@ -423,7 +475,7 @@ const App: React.FC = () => {
                   borderRadius: tokens.borderRadius.large,
                   padding: tokens.spacing.space3,
                   minWidth: '300px',
-                  flex: '0 0 auto'
+                  flex: '0 0 auto',
                 }}
               >
                 <div
@@ -434,7 +486,8 @@ const App: React.FC = () => {
                   }}
                 >
                   <Text
-                    variant="small"
+                    variant="tiny"
+                    weight="bold"
                     style={{
                       background: 'var(--gradient-rewards)',
                       padding: '4px 8px',
@@ -470,10 +523,15 @@ const App: React.FC = () => {
                     </defs>
                   </svg>
                 </div>
-                <H4 style={{ color: 'white', marginBottom: tokens.spacing.space2 }}>
+                <H4
+                  style={{
+                    color: 'white',
+                    marginBottom: tokens.spacing.space2,
+                  }}
+                >
                   25% discount on any ticket
                 </H4>
-                <Text variant="regular" color="secondary">
+                <Text variant="small" color="secondary">
                   500 Points
                 </Text>
                 <div
@@ -501,29 +559,36 @@ const App: React.FC = () => {
                 <Text
                   variant="small"
                   color="secondary"
-                  style={{ marginTop: tokens.spacing.space1, textAlign: 'right' }}
+                  style={{
+                    marginTop: tokens.spacing.space1,
+                    textAlign: 'right',
+                  }}
                 >
                   500/500pts
                 </Text>
-                <div style={{
-                  position: 'absolute',
-                  right: '-4.5px',
-                  top: '50%',
-                  width: '1px',
-                  height: '1px',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  transform: 'translateY(-50%)'
-                }} />
+                <div
+                  style={{
+                    position: 'absolute',
+                    right: '-4.5px',
+                    top: '50%',
+                    width: '1px',
+                    height: '1px',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    transform: 'translateY(-50%)',
+                  }}
+                />
               </div>
 
               {/* Connecting line */}
-              <div style={{
-                width: '8px',
-                height: '1px',
-                background: 'rgba(255, 255, 255, 0.1)',
-                alignSelf: 'center',
-                flexShrink: 0
-              }} />
+              <div
+                style={{
+                  width: '8px',
+                  height: '1px',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  alignSelf: 'center',
+                  flexShrink: 0,
+                }}
+              />
 
               {/* Locked Reward Card - Get a free hat */}
               <div
@@ -533,7 +598,7 @@ const App: React.FC = () => {
                   padding: tokens.spacing.space2,
                   minWidth: '300px',
                   flex: '0 0 auto',
-                  border: '1px solid rgba(255, 255, 255, 0.1)'
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
                 }}
               >
                 <div
@@ -564,7 +629,12 @@ const App: React.FC = () => {
                     <path d="M12 2L14.2451 8.90983H21.5106L15.6327 13.1803L17.8779 20.0902L12 15.8197L6.12215 20.0902L8.36729 13.1803L2.48944 8.90983H9.75486L12 2Z" />
                   </svg>
                 </div>
-                <H4 style={{ color: 'white', marginBottom: tokens.spacing.space2 }}>
+                <H4
+                  style={{
+                    color: 'white',
+                    marginBottom: tokens.spacing.space2,
+                  }}
+                >
                   Get a free hat
                 </H4>
                 <Text variant="regular" color="secondary">
@@ -595,29 +665,36 @@ const App: React.FC = () => {
                 <Text
                   variant="small"
                   color="secondary"
-                  style={{ marginTop: tokens.spacing.space1, textAlign: 'right' }}
+                  style={{
+                    marginTop: tokens.spacing.space1,
+                    textAlign: 'right',
+                  }}
                 >
                   400/500pts
                 </Text>
-                <div style={{
-                  position: 'absolute',
-                  right: '-4.5px',
-                  top: '50%',
-                  width: '1px',
-                  height: '1px',
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  transform: 'translateY(-50%)'
-                }} />
+                <div
+                  style={{
+                    position: 'absolute',
+                    right: '-4.5px',
+                    top: '50%',
+                    width: '1px',
+                    height: '1px',
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    transform: 'translateY(-50%)',
+                  }}
+                />
               </div>
 
               {/* Connecting line */}
-              <div style={{
-                width: '8px',
-                height: '1px',
-                background: 'rgba(255, 255, 255, 0.1)',
-                alignSelf: 'center',
-                flexShrink: 0
-              }} />
+              <div
+                style={{
+                  width: '8px',
+                  height: '1px',
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  alignSelf: 'center',
+                  flexShrink: 0,
+                }}
+              />
 
               {/* Locked Reward Card - 75% Off */}
               <div
@@ -627,7 +704,7 @@ const App: React.FC = () => {
                   padding: tokens.spacing.space2,
                   minWidth: '300px',
                   flex: '0 0 auto',
-                  border: '1px solid rgba(255, 255, 255, 0.1)'
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
                 }}
               >
                 <div
@@ -658,7 +735,12 @@ const App: React.FC = () => {
                     <path d="M12 2L14.2451 8.90983H21.5106L15.6327 13.1803L17.8779 20.0902L12 15.8197L6.12215 20.0902L8.36729 13.1803L2.48944 8.90983H9.75486L12 2Z" />
                   </svg>
                 </div>
-                <H4 style={{ color: 'white', marginBottom: tokens.spacing.space2 }}>
+                <H4
+                  style={{
+                    color: 'white',
+                    marginBottom: tokens.spacing.space2,
+                  }}
+                >
                   75% Off Any Tickets
                 </H4>
                 <Text variant="regular" color="secondary">
@@ -689,12 +771,18 @@ const App: React.FC = () => {
                 <Text
                   variant="small"
                   color="secondary"
-                  style={{ marginTop: tokens.spacing.space1, textAlign: 'right' }}
+                  style={{
+                    marginTop: tokens.spacing.space1,
+                    textAlign: 'right',
+                  }}
                 >
                   10/20pts
                 </Text>
               </div>
-              <div style={{ minWidth: '8px', flex: '0 0 8px' }} aria-hidden="true" />
+              <div
+                style={{ minWidth: '8px', flex: '0 0 8px' }}
+                aria-hidden="true"
+              />
             </div>
           </div>
 
@@ -705,7 +793,7 @@ const App: React.FC = () => {
               justifyContent: 'center',
               gap: tokens.spacing.space2,
               marginTop: '24px',
-              marginBottom: '24px'
+              marginBottom: '24px',
             }}
           >
             <div

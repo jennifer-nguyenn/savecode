@@ -10,16 +10,20 @@ interface ImageProps {
   className?: string;
 }
 
-const ImageContainer = styled.div<{ $aspectRatio?: string }>`
+interface ImageContainerProps {
+  $aspectRatio?: string;
+}
+
+export const ImageContainer = styled.div<ImageContainerProps>`
   position: relative;
   width: 100%;
   padding-top: ${({ $aspectRatio = '56.25%' }) => $aspectRatio};
   background-color: ${tokens.colors.cardBackground};
-  border-radius: ${tokens.borderRadius.radius2};
+  border-radius: ${tokens.borderRadius.medium};
   overflow: hidden;
 `;
 
-const StyledImage = styled.img`
+export const StyledImage = styled.img`
   position: absolute;
   top: 0;
   left: 0;

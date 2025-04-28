@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { tokens } from '../../styles/tokens';
 import { Text } from '../Typography';
 import { ReactNode } from 'react';
 
@@ -21,7 +20,7 @@ const ButtonWrapper = styled.div<{ variant: ButtonVariant }>`
     variant === 'gradient' &&
     css`
       background: var(--gradient-rewards);
-      border-radius: ${tokens.borderRadius.medium};
+      border-radius: var(--radius-medium);
       padding: 1px;
     `}
 `;
@@ -29,16 +28,16 @@ const ButtonWrapper = styled.div<{ variant: ButtonVariant }>`
 const Button = styled.button<{ variant: ButtonVariant }>`
   width: 100%;
   background: ${({ variant }) =>
-    variant === 'default' ? tokens.colors.cardBackground : 'transparent'};
+    variant === 'default' ? 'var(--color-card-bg)' : 'transparent'};
   border: none;
-  border-radius: ${tokens.borderRadius.medium};
-  padding: ${tokens.spacing.space2};
+  border-radius: var(--radius-medium);
+  padding: var(--space-2);
   cursor: pointer;
   transition: opacity 0.2s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: ${tokens.spacing.space2};
+  gap: var(--space-2);
 
   &:hover {
     opacity: 0.8;
@@ -46,9 +45,9 @@ const Button = styled.button<{ variant: ButtonVariant }>`
 `;
 
 const ButtonText = styled(Text)`
-  color: ${tokens.colors.textPrimary};
+  color: var(--color-text-primary);
   text-align: center;
-  font-weight: ${tokens.typography.weights.bold};
+  font-weight: var(--font-weight-bold);
 `;
 
 /**
@@ -66,9 +65,7 @@ export const RewardsActionButton: React.FC<RewardsActionButtonProps> = ({
   const buttonContent = (
     <>
       {icon && (
-        <span style={{ display: 'flex', alignItems: 'center' }}>
-          {icon}
-        </span>
+        <span style={{ display: 'flex', alignItems: 'center' }}>{icon}</span>
       )}
       <ButtonText variant="regular">{label}</ButtonText>
     </>

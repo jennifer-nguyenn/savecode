@@ -1,51 +1,70 @@
+import React from 'react';
 import styled from 'styled-components';
-import { tokens } from '../../styles/tokens';
-import { H2, Text } from '../Typography';
+import { H4, Text } from '../Typography';
 
 interface RewardCardProps {
   title: string;
   points?: number;
   sales?: number;
+  description?: string;
   children?: React.ReactNode;
 }
 
 const CardContainer = styled.div`
-  background: ${tokens.colors.cardBackground};
-  border-radius: ${tokens.borderRadius.large};
-  padding: ${tokens.spacing.space3};
+  background: var(--color-card-bg);
+  border-radius: var(--radius-large);
+  padding: var(--space-3);
   display: flex;
   flex-direction: column;
-  gap: ${tokens.spacing.space2};
+  gap: var(--space-2);
 `;
 
-const PointsText = styled(H2)`
+const HeaderText = styled(Text)`
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+`;
+
+const PointsText = styled(H4)`
   background: var(--gradient-rewards);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
 `;
 
-const SalesText = styled(H2)`
-  color: ${tokens.colors.textPrimary};
+const SalesText = styled(H4)`
+  color: var(--color-text-primary);
   margin: 0;
 `;
 
-const HeaderText = styled(Text)`
-  color: ${tokens.colors.textPrimary};
-  font-weight: ${tokens.typography.weights.bold};
+const DescriptionText = styled(Text)`
+  color: var(--color-text-secondary);
 `;
 
 export const RewardCard: React.FC<RewardCardProps> = ({
   title,
   points,
   sales,
+  description,
   children,
 }) => {
   return (
     <CardContainer>
       <HeaderText>{title}</HeaderText>
-      {points && <PointsText>{points.toLocaleString()} pts</PointsText>}
-      {sales && <SalesText>${sales.toLocaleString()}</SalesText>}
+      {points && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <PointsText>{points}</PointsText>
+          <Text variant="regular">Points</Text>
+        </div>
+      )}
+      {sales && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <SalesText>{sales}</SalesText>
+          <Text variant="regular">Sales</Text>
+        </div>
+      )}
+      {description && (
+        <DescriptionText variant="regular">{description}</DescriptionText>
+      )}
       {children}
     </CardContainer>
   );
