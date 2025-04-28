@@ -16,4 +16,4 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   ${globalStyles}
-`; 
+`;

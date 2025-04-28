@@ -26,10 +26,10 @@ export const tokens = {
     space5: '40px',
   },
   borderRadius: {
-    radius0: '0px',
-    radius1: '8px',
-    radius2: '16px',
-    radius3: '1000px',
+    none: '0px',
+    medium: '8px', // Used for action buttons in rewards section
+    large: '16px', // Used for cards and containers
+    pill: '1000px', // Used for tags and pills
   },
   typography: {
     fontFamily: "'Greycliff CF', sans-serif",
@@ -107,10 +107,10 @@ export const globalStyles = css`
     --space-5: ${tokens.spacing.space5};
 
     /* Border Radius */
-    --radius-0: ${tokens.borderRadius.radius0};
-    --radius-1: ${tokens.borderRadius.radius1};
-    --radius-2: ${tokens.borderRadius.radius2};
-    --radius-3: ${tokens.borderRadius.radius3};
+    --radius-none: ${tokens.borderRadius.none};
+    --radius-medium: ${tokens.borderRadius.medium};
+    --radius-large: ${tokens.borderRadius.large};
+    --radius-pill: ${tokens.borderRadius.pill};
   }
 `;
 

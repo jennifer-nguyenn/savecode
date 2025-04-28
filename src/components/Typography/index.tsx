@@ -13,40 +13,30 @@ const baseTextStyles = `
 
 export const H1 = styled.h1`
   ${baseTextStyles}
-  font-size: ${tokens.typography.sizes.h1.mobile};
-  line-height: ${tokens.typography.lineHeight.h1.mobile};
-  font-weight: ${tokens.typography.weights.extraBold};
-
-  @media (min-width: ${tokens.breakpoints.tablet}) {
-    font-size: ${tokens.typography.sizes.h1.desktop};
-    line-height: ${tokens.typography.lineHeight.h1.desktop};
-  }
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+  font-weight: var(--font-weight-extra-bold);
 `;
 
 export const H2 = styled.h2`
   ${baseTextStyles}
-  font-size: ${tokens.typography.sizes.h2.mobile};
-  line-height: ${tokens.typography.lineHeight.h2.mobile};
-  font-weight: ${tokens.typography.weights.extraBold};
-
-  @media (min-width: ${tokens.breakpoints.tablet}) {
-    font-size: ${tokens.typography.sizes.h2.desktop};
-    line-height: ${tokens.typography.lineHeight.h2.desktop};
-  }
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+  font-weight: var(--font-weight-extra-bold);
 `;
 
 export const H3 = styled.h3`
   ${baseTextStyles}
-  font-size: ${tokens.typography.sizes.h3};
-  line-height: ${tokens.typography.lineHeight.h3};
-  font-weight: ${tokens.typography.weights.bold};
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
+  font-weight: var(--font-weight-extra-bold);
 `;
 
 export const H4 = styled.h4`
   ${baseTextStyles}
-  font-size: ${tokens.typography.sizes.h4};
-  line-height: ${tokens.typography.lineHeight.h4};
-  font-weight: ${tokens.typography.weights.bold};
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+  font-weight: var(--font-weight-extra-bold);
 `;
 
 interface TextProps {
@@ -55,21 +45,44 @@ interface TextProps {
   color?: TypographyColor;
 }
 
-const getTypographySize = (variant: TypographyVariant = 'regular') => {
-  const sizes = tokens.typography.sizes;
-  return typeof sizes[variant] === 'string' ? sizes[variant] : sizes.regular;
+const getTypographySizeVar = (variant: TypographyVariant = 'regular') => {
+  switch (variant) {
+    case 'large':
+      return 'var(--font-size-large)';
+    case 'regular':
+      return 'var(--font-size-regular)';
+    case 'small':
+      return 'var(--font-size-small)';
+    case 'tiny':
+      return 'var(--font-size-tiny)';
+    default:
+      return 'var(--font-size-regular)';
+  }
 };
 
-const getTypographyLineHeight = (variant: TypographyVariant = 'regular') => {
-  const lineHeights = tokens.typography.lineHeight;
-  return typeof lineHeights[variant] === 'string' ? lineHeights[variant] : lineHeights.regular;
+const getTypographyLineHeightVar = (variant: TypographyVariant = 'regular') => {
+  switch (variant) {
+    case 'large':
+      return 'var(--line-height-large)';
+    case 'regular':
+      return 'var(--line-height-regular)';
+    case 'small':
+      return 'var(--line-height-small)';
+    case 'tiny':
+      return 'var(--line-height-tiny)';
+    default:
+      return 'var(--line-height-regular)';
+  }
 };
 
 export const Text = styled.p<TextProps>`
   ${baseTextStyles}
-  font-size: ${({ variant = 'regular' }) => getTypographySize(variant)};
-  line-height: ${({ variant = 'regular' }) => getTypographyLineHeight(variant)};
+  font-size: ${({ variant = 'regular' }) => getTypographySizeVar(variant)};
+  line-height: ${({ variant = 'regular' }) =>
+    getTypographyLineHeightVar(variant)};
   font-weight: ${({ weight = 'medium' }) => tokens.typography.weights[weight]};
   color: ${({ color = 'primary' }) =>
-    color === 'primary' ? tokens.colors.textPrimary : tokens.colors.textSecondary};
+    color === 'primary'
+      ? tokens.colors.textPrimary
+      : tokens.colors.textSecondary};
 `;

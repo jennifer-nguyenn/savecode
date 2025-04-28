@@ -48,11 +48,11 @@ const Placeholder = styled.div`
   }
 `;
 
-export const Image: React.FC<ImageProps> = ({ 
-  src, 
-  alt, 
+export const Image: React.FC<ImageProps> = ({
+  src,
+  alt,
   aspectRatio,
-  className 
+  className,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -70,10 +70,7 @@ export const Image: React.FC<ImageProps> = ({
     <ImageContainer $aspectRatio={aspectRatio} className={className}>
       {(isLoading || hasError) && (
         <Placeholder>
-          <Icon 
-            name={hasError ? "broken_image" : "photo"} 
-            size={32}
-          />
+          <Icon name={hasError ? 'broken_image' : 'photo'} size={32} />
         </Placeholder>
       )}
       {!hasError && (
@@ -88,4 +85,4 @@ export const Image: React.FC<ImageProps> = ({
       )}
     </ImageContainer>
   );
-}; 
+};
