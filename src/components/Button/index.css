@@ -1,0 +1,100 @@
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-space1);
+  padding: var(--spacing-space2) var(--spacing-space3);
+  font-family: var(--typography-fontFamily);
+  font-size: var(--typography-sizes-regular);
+  font-weight: var(--typography-weights-bold);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  outline: none;
+}
+
+.button-base:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button {
+  composes: button-base;
+  border-radius: var(--borderRadius-radius1);
+  background: var(--colors-cardBackground);
+  color: var(--colors-textPrimary);
+}
+
+.button--primary {
+  border-radius: var(--borderRadius-radius3);
+  background: linear-gradient(
+    90deg,
+    var(--colors-gradient-start) 0%,
+    var(--colors-gradient-middle) 50%,
+    var(--colors-gradient-end) 100%
+  );
+  box-shadow: 0 4px 12px rgba(143, 6, 209, 0.3);
+}
+
+.button--full-width {
+  width: 100%;
+}
+
+.button--loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.button:not(:disabled):hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.button--primary:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(143, 6, 209, 0.4);
+}
+
+.loading-spinner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--colors-textPrimary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.icon-button {
+  composes: button-base;
+  padding: var(--spacing-space1);
+  border-radius: var(--borderRadius-radius1);
+  background: var(--colors-cardBackground);
+  width: 40px;
+  height: 40px;
+}
+
+.icon-button--loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.icon-button .material-icons {
+  font-size: 24px;
+  transition: transform 0.2s ease;
+}
+
+.icon-button:not(:disabled):hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.icon-button:not(:disabled):hover .material-icons {
+  transform: scale(1.1);
+} 
