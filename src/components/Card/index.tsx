@@ -67,38 +67,31 @@ export const OrderCard = styled.div<CardProps>`
 `;
 
 export const ItemCard = styled.div<CardProps>`
-  background-color: transparent;
-  border-radius: ${tokens.borderRadius.radius2};
+  ${baseCardStyles}
+  background-color: ${tokens.colors.cardBackground};
+  color: ${tokens.colors.textPrimary};
   overflow: hidden;
 
   .image-container {
     width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
     position: relative;
-    border-radius: ${tokens.borderRadius.radius2} ${tokens.borderRadius.radius2} 0 0;
-    overflow: hidden;
-  }
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .content {
-    background-color: ${tokens.colors.textPrimary};
     padding: ${tokens.spacing.space2};
     display: flex;
     flex-direction: column;
     gap: ${tokens.spacing.space1};
-    border-radius: 0 0 ${tokens.borderRadius.radius2} ${tokens.borderRadius.radius2};
-
-    p {
-      color: ${tokens.colors.darkTextPrimary};
-    }
-
-    p[color="secondary"] {
-      color: ${tokens.colors.darkTextSecondary80};
-    }
   }
 `;
 
