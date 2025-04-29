@@ -31,6 +31,11 @@ export const tokens = {
     large: '16px', // Used for cards and containers
     pill: '1000px', // Used for tags and pills
   },
+  components: {
+    orderInfoCard: {
+      mobileWidth: '167.5px',
+    },
+  },
   typography: {
     fontFamily: "'Greycliff CF', sans-serif",
     weights: {
@@ -86,6 +91,8 @@ export const globalStyles = css`
     --color-text-secondary: ${tokens.colors.textSecondary};
     --color-card-bg: ${tokens.colors.cardBackground};
     --color-order-card: ${tokens.colors.orderCard};
+    --color-dark-text-primary: ${tokens.colors.darkTextPrimary};
+    --color-dark-text-secondary: ${tokens.colors.darkTextSecondary};
 
     /* Gradients */
     --gradient-rewards: linear-gradient(
@@ -97,6 +104,35 @@ export const globalStyles = css`
 
     /* Typography */
     --font-family: ${tokens.typography.fontFamily};
+
+    /* Font Sizes */
+    --font-size-h1: ${tokens.typography.sizes.h1.desktop};
+    --font-size-h1-mobile: ${tokens.typography.sizes.h1.mobile};
+    --font-size-h2: ${tokens.typography.sizes.h2.desktop};
+    --font-size-h2-mobile: ${tokens.typography.sizes.h2.mobile};
+    --font-size-h3: ${tokens.typography.sizes.h3};
+    --font-size-h4: ${tokens.typography.sizes.h4};
+    --font-size-large: ${tokens.typography.sizes.large};
+    --font-size-regular: ${tokens.typography.sizes.regular};
+    --font-size-small: ${tokens.typography.sizes.small};
+    --font-size-tiny: ${tokens.typography.sizes.tiny};
+
+    /* Line Heights */
+    --line-height-h1: ${tokens.typography.lineHeight.h1.desktop};
+    --line-height-h1-mobile: ${tokens.typography.lineHeight.h1.mobile};
+    --line-height-h2: ${tokens.typography.lineHeight.h2.desktop};
+    --line-height-h2-mobile: ${tokens.typography.lineHeight.h2.mobile};
+    --line-height-h3: ${tokens.typography.lineHeight.h3};
+    --line-height-h4: ${tokens.typography.lineHeight.h4};
+    --line-height-large: ${tokens.typography.lineHeight.large};
+    --line-height-regular: ${tokens.typography.lineHeight.regular};
+    --line-height-small: ${tokens.typography.lineHeight.small};
+    --line-height-tiny: ${tokens.typography.lineHeight.tiny};
+
+    /* Font Weights */
+    --font-weight-medium: ${tokens.typography.weights.medium};
+    --font-weight-bold: ${tokens.typography.weights.bold};
+    --font-weight-extra-bold: ${tokens.typography.weights.extraBold};
 
     /* Spacing */
     --space-0: ${tokens.spacing.space0};

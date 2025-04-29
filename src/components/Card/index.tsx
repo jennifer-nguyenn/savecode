@@ -3,9 +3,10 @@ import { tokens } from '../../styles/tokens';
 import { Text } from '../Typography';
 import React from 'react';
 
-const baseCardStyles = `
-  border-radius: ${tokens.borderRadius.large};
-  padding: ${tokens.spacing.space2};
+export const baseCardStyles = `
+  background: var(--color-card-bg);
+  border-radius: var(--radius-large);
+  padding: var(--space-3);
 `;
 
 interface CardProps {
@@ -147,19 +148,19 @@ export const ActionCard = styled.div<CardProps>`
 
 export const RewardCard = styled.div<RewardCardProps>`
   ${baseCardStyles}
-  background: ${tokens.colors.gradient.start};
-  background: linear-gradient(
-    90deg,
-    ${tokens.colors.gradient.start} 0%,
-    ${tokens.colors.gradient.middle} 50%,
-    ${tokens.colors.gradient.end} 100%
-  );
-  color: ${tokens.colors.textPrimary};
+  background: var(--gradient-rewards);
+  color: var(--color-text-primary);
   display: flex;
   flex-direction: column;
-  gap: ${tokens.spacing.space2};
+  gap: var(--space-2);
   opacity: ${({ $unlocked = false }) => ($unlocked ? 1 : 0.7)};
   transition: opacity 0.2s ease;
+  width: 311px;
+  min-width: 311px;
+  max-width: 311px;
+  flex: 0 0 auto;
+  padding: var(--space-3);
+  border-radius: var(--radius-large);
 
   &:hover {
     opacity: 1;
@@ -169,14 +170,20 @@ export const RewardCard = styled.div<RewardCardProps>`
     width: 100%;
     height: 4px;
     background-color: rgba(0, 0, 0, 0.2);
-    border-radius: ${tokens.borderRadius.pill};
+    border-radius: var(--radius-pill);
     overflow: hidden;
 
     .progress {
       height: 100%;
-      background-color: ${tokens.colors.textPrimary};
+      background-color: var(--color-text-primary);
       transition: width 0.3s ease;
     }
+  }
+
+  @media (min-width: ${tokens.breakpoints.tablet}) {
+    width: 311px;
+    min-width: 311px;
+    max-width: 311px;
   }
 `;
 

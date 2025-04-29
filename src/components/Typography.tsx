@@ -19,6 +19,11 @@ export const H1 = styled.h1`
   font-size: var(--font-size-h1);
   line-height: var(--line-height-h1);
   font-weight: var(--font-weight-extra-bold);
+
+  @media (max-width: ${tokens.breakpoints.tablet}) {
+    font-size: var(--font-size-h1-mobile);
+    line-height: var(--line-height-h1-mobile);
+  }
 `;
 
 export const H2 = styled.h2`
@@ -26,6 +31,11 @@ export const H2 = styled.h2`
   font-size: var(--font-size-h2);
   line-height: var(--line-height-h2);
   font-weight: var(--font-weight-extra-bold);
+
+  @media (max-width: ${tokens.breakpoints.tablet}) {
+    font-size: var(--font-size-h2-mobile);
+    line-height: var(--line-height-h2-mobile);
+  }
 `;
 
 export const H3 = styled.h3`
