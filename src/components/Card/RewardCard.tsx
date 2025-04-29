@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { H4, Text } from '../Typography';
 import { tokens } from '../../styles/tokens';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 interface RewardCardProps {
   title: string;
@@ -22,7 +24,7 @@ const CardContainer = styled.div<{ $unlocked?: boolean }>`
   display: flex;
   flex-direction: column;
   padding: 24px;
-  opacity: ${({ $unlocked }) => ($unlocked ? 1 : 0.7)};
+  opacity: ${({ $unlocked }: { $unlocked?: boolean }) => ($unlocked ? 1 : 0.7)};
   transition: opacity 0.2s ease;
 
   &:hover {
@@ -46,11 +48,9 @@ const Title = styled(H4)`
   color: ${tokens.colors.textPrimary};
   font-size: ${tokens.typography.sizes.h4};
   line-height: ${tokens.typography.lineHeight.h4};
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   margin-bottom: 5px;
 `;
 
@@ -81,7 +81,7 @@ const ProgressFill = styled.div<{ $progress: number }>`
   left: 0;
   top: 0;
   height: 100%;
-  width: ${({ $progress }) => `${$progress}%`};
+  width: ${({ $progress }: { $progress: number }) => `${$progress}%`};
   background: var(--gradient-rewards);
   border-radius: 2px;
   transition: width 0.3s ease;
@@ -93,17 +93,36 @@ const ProgressText = styled(Text)`
   line-height: ${tokens.typography.lineHeight.small};
 `;
 
+const StarWrapper = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+`;
+
 export const RewardCard: React.FC<RewardCardProps> = ({
   title,
   points,
   progress,
   totalPoints,
   isUnlocked = false,
-}) => {
+}: RewardCardProps) => {
   const progressPercentage = (progress / totalPoints) * 100;
 
   return (
     <CardContainer $unlocked={isUnlocked}>
+      <StarWrapper>
+        {isUnlocked ? (
+          <StarIcon sx={{ width: 28, height: 28, color: 'var(--gradient-end)' }} />
+        ) : (
+          <StarBorderIcon sx={{ width: 28, height: 28, color: 'var(--gradient-end)' }} />
+        )}
+      </StarWrapper>
       {isUnlocked && (
         <UnlockedBadge>
           <Text variant="tiny" weight="bold">
