@@ -14,8 +14,12 @@ interface RewardCardProps {
 }
 
 const CardContainer = styled.div<{ $unlocked?: boolean }>`
-  background: ${({ $unlocked }) => ($unlocked ? tokens.colors.cardBackground : 'transparent')};
-  border: ${({ $unlocked }) => (!$unlocked ? '1px solid rgba(255, 255, 255, 0.1)' : 'none')};
+  background: ${({ $unlocked }) => 
+    $unlocked ? tokens.colors.cardBackground : 'transparent'
+  };
+  border: ${({ $unlocked }) => 
+    !$unlocked ? '1px solid rgba(255, 255, 255, 0.1)' : 'none'
+  };
   border-radius: ${tokens.borderRadius.large};
   min-width: 311px;
   width: 311px;
