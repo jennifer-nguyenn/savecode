@@ -118,9 +118,13 @@ export const RewardCard: React.FC<RewardCardProps> = ({
     <CardContainer $unlocked={isUnlocked}>
       <StarWrapper>
         {isUnlocked ? (
-          <StarIcon sx={{ width: 28, height: 28, color: 'var(--gradient-end)' }} />
+          <StarIcon
+            sx={{ width: 28, height: 28, color: 'var(--gradient-end)' }}
+          />
         ) : (
-          <StarBorderIcon sx={{ width: 28, height: 28, color: 'var(--gradient-end)' }} />
+          <StarBorderIcon
+            sx={{ width: 28, height: 28, color: 'var(--gradient-end)' }}
+          />
         )}
       </StarWrapper>
       {isUnlocked && (

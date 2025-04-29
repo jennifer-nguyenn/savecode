@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './styles/global.css';
 import './components/Button/index.css';
 import { H2, H4, Text } from './components/Typography';
-import { ItemCard, ActionButton, RewardCard } from './components/Card';
+import { ItemCard, ActionButton } from './components/Card';
 import { OrderInfoCard } from './components/Card/OrderInfoCard';
 import { RewardsActionButton } from './components/Button/RewardsActionButton';
 import { tokens } from './styles/tokens';
@@ -15,6 +15,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import headerBg from './assets/game-header.jpg';
+import { RewardCard } from './components/Card/RewardCard';
 
 const rewards = {
   points: 10,
