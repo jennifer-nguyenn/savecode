@@ -528,7 +528,7 @@ const App: React.FC = () => {
                         flexDirection: 'row',
                         flexWrap: 'nowrap',
                         overflowX: 'auto',
-                        gap: tokens.spacing.space1,
+                        gap: '8px',
                         width: '100%',
                         scrollbarWidth: 'none',
                         paddingBottom: tokens.spacing.space2,

@@ -45,7 +45,7 @@ const UnlockedBadge = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: ${tokens.spacing.space3};
+  margin-bottom: 16px;
 `;
 
 const LockedBadge = styled.div`
@@ -57,14 +57,14 @@ const LockedBadge = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: ${tokens.spacing.space3};
+  margin-bottom: 16px;
 `;
 
 const Title = styled(H4)`
   color: ${tokens.colors.textPrimary};
   font-size: ${tokens.typography.sizes.h4};
   line-height: ${tokens.typography.lineHeight.h4};
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -78,13 +78,17 @@ const PointsText = styled(Text)`
   color: ${tokens.colors.textSecondary};
   font-size: ${tokens.typography.sizes.small};
   line-height: ${tokens.typography.lineHeight.small};
+  margin-bottom: auto;
+`;
+
+const ProgressContainer = styled.div`
+  margin-bottom: 24px;
 `;
 
 const ProgressBar = styled.div`
   display: flex;
   align-items: center;
-  gap: ${tokens.spacing.space2};
-  margin-top: auto;
+  gap: 8px;
 `;
 
 const ProgressTrack = styled.div`
@@ -163,14 +167,16 @@ export const RewardCard: React.FC<RewardCardProps> = ({
       )}
       <Title>{title}</Title>
       <PointsText>{points} Points</PointsText>
-      <ProgressBar>
-        <ProgressTrack>
-          <ProgressFill $progress={progressPercentage} />
-        </ProgressTrack>
-        <ProgressText>
-          {progress}/{totalPoints}pts
-        </ProgressText>
-      </ProgressBar>
+      <ProgressContainer>
+        <ProgressBar>
+          <ProgressTrack>
+            <ProgressFill $progress={progressPercentage} />
+          </ProgressTrack>
+          <ProgressText>
+            {progress}/{totalPoints}pts
+          </ProgressText>
+        </ProgressBar>
+      </ProgressContainer>
     </CardContainer>
   );
 };
