@@ -1,91 +1,126 @@
 import React from 'react';
 import styled from 'styled-components';
-import { H4, Text, H2 } from '../Typography';
-import { baseCardStyles } from './index';
+import { H4, Text } from '../Typography';
+import { tokens } from '../../styles/tokens';
 
 interface RewardCardProps {
   title: string;
-  points?: number;
-  sales?: number;
-  description?: string;
-  children?: React.ReactNode;
+  points: number;
+  progress: number;
+  totalPoints: number;
+  isUnlocked?: boolean;
 }
 
-const CardContainer = styled.div`
-  ${baseCardStyles}
+const CardContainer = styled.div<{ $unlocked?: boolean }>`
+  background: ${tokens.colors.cardBackground};
+  border-radius: ${tokens.borderRadius.large};
+  min-width: 311px;
   width: 311px;
-  max-width: 311px;
-  flex: 0 0 auto;
-  background: var(--color-card-bg);
-  color: var(--color-text);
-  opacity: 0.8;
-  transition: opacity 0.3s ease;
-  cursor: pointer;
+  height: 167px;
+  flex: 0 0 311px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  opacity: ${({ $unlocked }) => ($unlocked ? 1 : 0.7)};
+  transition: opacity 0.2s ease;
 
   &:hover {
     opacity: 1;
   }
-
-  .progress-bar {
-    height: 4px;
-    background: var(--color-progress-bg);
-    border-radius: var(--radius-small);
-    margin-top: var(--space-2);
-    overflow: hidden;
-
-    .progress {
-      height: 100%;
-      background: var(--color-primary);
-      border-radius: var(--radius-small);
-    }
-  }
 `;
 
-const HeaderText = styled(Text)`
-  color: var(--color-text);
-  font-weight: var(--font-weight-bold);
+const UnlockedBadge = styled.div`
+  background: var(--gradient-rewards);
+  padding: 4px 8px;
+  border-radius: ${tokens.borderRadius.pill};
+  width: 71px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
 `;
 
-const PointsText = styled(H2)`
-  color: var(--color-primary);
-  margin: 0;
+const Title = styled(H4)`
+  color: ${tokens.colors.textPrimary};
+  font-size: ${tokens.typography.sizes.h4};
+  line-height: ${tokens.typography.lineHeight.h4};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 5px;
 `;
 
-const SalesText = styled(H2)`
-  color: var(--color-text);
-  margin: 0;
+const PointsText = styled(Text)`
+  color: ${tokens.colors.textSecondary};
+  font-size: ${tokens.typography.sizes.small};
+  line-height: ${tokens.typography.lineHeight.small};
 `;
 
-const DescriptionText = styled(Text)`
-  color: var(--color-text-secondary);
+const ProgressBar = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${tokens.spacing.space2};
+  margin-top: 16px;
+`;
+
+const ProgressTrack = styled.div`
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+`;
+
+const ProgressFill = styled.div<{ $progress: number }>`
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: ${({ $progress }) => `${$progress}%`};
+  background: var(--gradient-rewards);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+`;
+
+const ProgressText = styled(Text)`
+  color: ${tokens.colors.textSecondary};
+  font-size: ${tokens.typography.sizes.small};
+  line-height: ${tokens.typography.lineHeight.small};
 `;
 
 export const RewardCard: React.FC<RewardCardProps> = ({
   title,
   points,
-  sales,
-  description,
-  children,
+  progress,
+  totalPoints,
+  isUnlocked = false,
 }) => {
+  const progressPercentage = (progress / totalPoints) * 100;
+
   return (
-    <CardContainer>
-      <HeaderText>{title}</HeaderText>
-      {points && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <PointsText>{points}</PointsText>
-          <Text variant="regular">Points</Text>
-        </div>
+    <CardContainer $unlocked={isUnlocked}>
+      {isUnlocked && (
+        <UnlockedBadge>
+          <Text variant="tiny" weight="bold">
+            Unlocked!
+          </Text>
+        </UnlockedBadge>
       )}
-      {sales && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <SalesText>{sales}</SalesText>
-          <Text variant="regular">Sales</Text>
-        </div>
-      )}
-      {description && (
-        <DescriptionText variant="regular">{description}</DescriptionText>
-      )}
-      {children}
+      <Title>{title}</Title>
+      <PointsText>{points} Points</PointsText>
+      <ProgressBar>
+        <ProgressTrack>
+          <ProgressFill $progress={progressPercentage} />
+        </ProgressTrack>
+        <ProgressText>
+          {progress}/{totalPoints}pts
+        </ProgressText>
+      </ProgressBar>
     </CardContainer>
   );
 };

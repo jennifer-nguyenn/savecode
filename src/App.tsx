@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './styles/global.css';
 import './components/Button/index.css';
 import { H2, H4, Text } from './components/Typography';
-import { ItemCard, ActionButton } from './components/Card';
+import { ItemCard, ActionButton, RewardCard } from './components/Card';
 import { OrderInfoCard } from './components/Card/OrderInfoCard';
 import { RewardsActionButton } from './components/Button/RewardsActionButton';
 import { tokens } from './styles/tokens';
@@ -22,6 +22,30 @@ const rewards = {
   unlocked: true,
   progress: 1,
 };
+
+const rewardCards = [
+  {
+    title: "25% discount on any ticket",
+    points: 500,
+    progress: 500,
+    totalPoints: 500,
+    isUnlocked: true
+  },
+  {
+    title: "Get a free hat",
+    points: 500,
+    progress: 400,
+    totalPoints: 500,
+    isUnlocked: false
+  },
+  {
+    title: "75% Off",
+    points: 20,
+    progress: 10,
+    totalPoints: 20,
+    isUnlocked: false
+  }
+];
 
 interface Order {
   date: string;
@@ -505,374 +529,34 @@ const App: React.FC = () => {
                         flexDirection: 'row',
                         flexWrap: 'nowrap',
                         overflowX: 'auto',
-                        gap: 0,
+                        gap: tokens.spacing.space1,
                         width: '100%',
                         scrollbarWidth: 'none',
                         paddingBottom: tokens.spacing.space2,
                       }}
                     >
-                      {/* Unlocked Reward Card */}
-                      <div
-                        style={{
-                          background: tokens.colors.cardBackground,
-                          borderRadius: tokens.borderRadius.large,
-                          minWidth: '311px',
-                          width: '311px',
-                          height: '167px',
-                          flex: '0 0 311px',
-                          position: 'relative',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          padding: '0 24px',
-                        }}
-                      >
-                        <div
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            marginTop: '24px',
-                          }}
-                        >
-                          <Text
-                            variant="tiny"
-                            weight="bold"
-                            style={{
-                              background: 'var(--gradient-rewards)',
-                              padding: '4px 8px',
-                              borderRadius: tokens.borderRadius.pill,
-                              width: '71px',
-                              height: '24px',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                            }}
-                          >
-                            Unlocked!
-                          </Text>
-                        </div>
-                        <div style={{ marginTop: '16px' }}>
-                          <H4
-                            style={{
-                              color: 'white',
-                              fontSize: 'var(--font-size-h4)',
-                              lineHeight: 'var(--line-height-h4)',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              display: '-webkit-box',
-                              WebkitLineClamp: 2,
-                              WebkitBoxOrient: 'vertical',
-                              marginBottom: '5px',
-                            }}
-                          >
-                            25% discount on any ticket
-                          </H4>
-                          <Text variant="small" color="secondary">
-                            500 Points
-                          </Text>
-                        </div>
-                        <div style={{ marginTop: '16px' }}>
-                          <div
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: tokens.spacing.space2,
-                            }}
-                          >
+                      {rewardCards.map((card, index) => (
+                        <React.Fragment key={index}>
+                          <RewardCard
+                            title={card.title}
+                            points={card.points}
+                            progress={card.progress}
+                            totalPoints={card.totalPoints}
+                            isUnlocked={card.isUnlocked}
+                          />
+                          {index < rewardCards.length - 1 && (
                             <div
                               style={{
-                                flex: 1,
-                                height: '4px',
+                                width: '8px',
+                                height: '1px',
                                 background: 'rgba(255, 255, 255, 0.1)',
-                                borderRadius: '2px',
-                                position: 'relative',
+                                alignSelf: 'center',
+                                flexShrink: 0,
                               }}
-                            >
-                              <div
-                                style={{
-                                  position: 'absolute',
-                                  left: 0,
-                                  top: 0,
-                                  height: '100%',
-                                  width: '100%',
-                                  background: 'var(--gradient-rewards)',
-                                  borderRadius: '2px',
-                                }}
-                              />
-                            </div>
-                            <Text variant="small" color="secondary">
-                              500/500pts
-                            </Text>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Connecting line */}
-                      <div
-                        style={{
-                          width: '8px',
-                          height: '1px',
-                          background: 'rgba(255, 255, 255, 0.1)',
-                          alignSelf: 'center',
-                          flexShrink: 0,
-                        }}
-                      />
-
-                      {/* Locked Reward Card - Get a free hat */}
-                      <div
-                        style={{
-                          background: 'transparent',
-                          borderRadius: tokens.borderRadius.large,
-                          minWidth: '311px',
-                          width: '311px',
-                          height: '167px',
-                          flex: '0 0 311px',
-                          position: 'relative',
-                          border: '1px solid rgba(255, 255, 255, 0.1)',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          padding: '0 24px',
-                        }}
-                      >
-                        {/* Star icon positioned absolutely */}
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: '24px',
-                            right: '24px',
-                            zIndex: 1,
-                          }}
-                        >
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M12 2L14.2451 8.90983H21.5106L15.6327 13.1803L17.8779 20.0902L12 15.8197L6.12215 20.0902L8.36729 13.1803L2.48944 8.90983H9.75486L12 2Z"
-                              fill="url(#paint0_linear)"
                             />
-                            <defs>
-                              <linearGradient
-                                id="paint0_linear"
-                                x1="2"
-                                y1="2"
-                                x2="22"
-                                y2="22"
-                                gradientUnits="userSpaceOnUse"
-                              >
-                                <stop stopColor="#B44AF9" />
-                                <stop offset="1" stopColor="#FF6B95" />
-                              </linearGradient>
-                            </defs>
-                          </svg>
-                        </div>
-                        <div
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            marginTop: '24px',
-                          }}
-                        >
-                          <Text
-                            variant="small"
-                            style={{
-                              color: 'white',
-                            }}
-                          >
-                            Locked
-                          </Text>
-                        </div>
-                        <div style={{ marginTop: '16px' }}>
-                          <H4
-                            style={{
-                              color: 'white',
-                              fontSize: 'var(--font-size-h4)',
-                              lineHeight: 'var(--line-height-h4)',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              display: '-webkit-box',
-                              WebkitLineClamp: 2,
-                              WebkitBoxOrient: 'vertical',
-                              marginBottom: '5px',
-                            }}
-                          >
-                            Get a free hat
-                          </H4>
-                          <Text variant="regular" color="secondary">
-                            Get 5 more points to unlock
-                          </Text>
-                        </div>
-                        <div style={{ marginTop: '16px' }}>
-                          <div
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: tokens.spacing.space2,
-                            }}
-                          >
-                            <div
-                              style={{
-                                flex: 1,
-                                height: '4px',
-                                background: 'rgba(255, 255, 255, 0.1)',
-                                borderRadius: '2px',
-                                position: 'relative',
-                              }}
-                            >
-                              <div
-                                style={{
-                                  position: 'absolute',
-                                  left: 0,
-                                  top: 0,
-                                  height: '100%',
-                                  width: '80%',
-                                  background: 'var(--gradient-rewards)',
-                                  borderRadius: '2px',
-                                }}
-                              />
-                            </div>
-                            <Text variant="small" color="secondary">
-                              400/500pts
-                            </Text>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Connecting line */}
-                      <div
-                        style={{
-                          width: '8px',
-                          height: '1px',
-                          background: 'rgba(255, 255, 255, 0.1)',
-                          alignSelf: 'center',
-                          flexShrink: 0,
-                        }}
-                      />
-
-                      {/* Locked Reward Card - 75% Off */}
-                      <div
-                        style={{
-                          background: 'transparent',
-                          borderRadius: tokens.borderRadius.large,
-                          minWidth: '311px',
-                          width: '311px',
-                          height: '167px',
-                          flex: '0 0 311px',
-                          position: 'relative',
-                          border: '1px solid rgba(255, 255, 255, 0.1)',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          padding: '0 24px',
-                        }}
-                      >
-                        {/* Star icon positioned absolutely */}
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: '24px',
-                            right: '24px',
-                            zIndex: 1,
-                          }}
-                        >
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M12 2L14.2451 8.90983H21.5106L15.6327 13.1803L17.8779 20.0902L12 15.8197L6.12215 20.0902L8.36729 13.1803L2.48944 8.90983H9.75486L12 2Z"
-                              fill="url(#paint0_linear)"
-                            />
-                            <defs>
-                              <linearGradient
-                                id="paint0_linear"
-                                x1="2"
-                                y1="2"
-                                x2="22"
-                                y2="22"
-                                gradientUnits="userSpaceOnUse"
-                              >
-                                <stop stopColor="#B44AF9" />
-                                <stop offset="1" stopColor="#FF6B95" />
-                              </linearGradient>
-                            </defs>
-                          </svg>
-                        </div>
-                        <div
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            marginTop: '24px',
-                          }}
-                        >
-                          <Text
-                            variant="small"
-                            style={{
-                              color: 'white',
-                            }}
-                          >
-                            Locked
-                          </Text>
-                        </div>
-                        <div style={{ marginTop: '16px' }}>
-                          <H4
-                            style={{
-                              color: 'white',
-                              fontSize: 'var(--font-size-h4)',
-                              lineHeight: 'var(--line-height-h4)',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              display: '-webkit-box',
-                              WebkitLineClamp: 2,
-                              WebkitBoxOrient: 'vertical',
-                              marginBottom: '5px',
-                            }}
-                          >
-                            75% Off Any Tickets
-                          </H4>
-                          <Text variant="regular" color="secondary">
-                            Get 10 more points to unlock
-                          </Text>
-                        </div>
-                        <div style={{ marginTop: '16px' }}>
-                          <div
-                            style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: tokens.spacing.space2,
-                            }}
-                          >
-                            <div
-                              style={{
-                                flex: 1,
-                                height: '4px',
-                                background: 'rgba(255, 255, 255, 0.1)',
-                                borderRadius: '2px',
-                                position: 'relative',
-                              }}
-                            >
-                              <div
-                                style={{
-                                  position: 'absolute',
-                                  left: 0,
-                                  top: 0,
-                                  height: '100%',
-                                  width: '50%',
-                                  background: 'var(--gradient-rewards)',
-                                  borderRadius: '2px',
-                                }}
-                              />
-                            </div>
-                            <Text variant="small" color="secondary">
-                              10/20pts
-                            </Text>
-                          </div>
-                        </div>
-                      </div>
+                          )}
+                        </React.Fragment>
+                      ))}
                       <div
                         style={{ minWidth: '8px', flex: '0 0 8px' }}
                         aria-hidden="true"
