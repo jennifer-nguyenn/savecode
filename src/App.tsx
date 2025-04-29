@@ -25,26 +25,26 @@ const rewards = {
 
 const rewardCards = [
   {
-    title: "25% discount on any ticket",
+    title: '25% discount on any ticket',
     points: 500,
     progress: 500,
     totalPoints: 500,
-    isUnlocked: true
+    isUnlocked: true,
   },
   {
-    title: "Get a free hat",
+    title: 'Get a free hat',
     points: 500,
     progress: 400,
     totalPoints: 500,
-    isUnlocked: false
+    isUnlocked: false,
   },
   {
-    title: "75% Off",
+    title: '75% Off',
     points: 20,
     progress: 10,
     totalPoints: 20,
-    isUnlocked: false
-  }
+    isUnlocked: false,
+  },
 ];
 
 interface Order {
