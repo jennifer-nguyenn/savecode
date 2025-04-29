@@ -7,14 +7,12 @@ import { ItemCard, ActionButton } from './components/Card';
 import { OrderInfoCard } from './components/Card/OrderInfoCard';
 import { RewardsActionButton } from './components/Button/RewardsActionButton';
 import { tokens } from './styles/tokens';
-import PaymentsIcon from '@mui/icons-material/Payments';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IosShareIcon from '@mui/icons-material/IosShare';
-import headerBg from './assets/game-header.jpg';
 import { RewardCard } from './components/Card/RewardCard';
 
 const rewards = {

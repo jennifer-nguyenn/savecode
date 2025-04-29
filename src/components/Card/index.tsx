@@ -13,10 +13,6 @@ interface CardProps {
   className?: string;
 }
 
-interface RewardCardProps extends CardProps {
-  $unlocked?: boolean;
-}
-
 export const OrderCard = styled.div<CardProps>`
   background-color: ${tokens.colors.orderCard};
   color: ${tokens.colors.darkTextPrimary};
