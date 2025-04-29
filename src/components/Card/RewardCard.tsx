@@ -14,7 +14,8 @@ interface RewardCardProps {
 }
 
 const CardContainer = styled.div<{ $unlocked?: boolean }>`
-  background: ${tokens.colors.cardBackground};
+  background: ${({ $unlocked }) => $unlocked ? tokens.colors.cardBackground : 'transparent'};
+  border: ${({ $unlocked }) => !$unlocked ? '1px solid rgba(255, 255, 255, 0.1)' : 'none'};
   border-radius: ${tokens.borderRadius.large};
   min-width: 311px;
   width: 311px;
@@ -24,8 +25,9 @@ const CardContainer = styled.div<{ $unlocked?: boolean }>`
   display: flex;
   flex-direction: column;
   padding: 24px;
-  opacity: ${({ $unlocked }: { $unlocked?: boolean }) => ($unlocked ? 1 : 0.7)};
+  opacity: ${({ $unlocked }) => ($unlocked ? 1 : 0.7)};
   transition: opacity 0.2s ease;
+  box-sizing: border-box;
 
   &:hover {
     opacity: 1;
@@ -36,22 +38,38 @@ const UnlockedBadge = styled.div`
   background: var(--gradient-rewards);
   padding: 4px 8px;
   border-radius: ${tokens.borderRadius.pill};
-  width: 71px;
+  width: fit-content;
   height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: ${tokens.spacing.space3};
+`;
+
+const LockedBadge = styled.div`
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: ${tokens.borderRadius.pill};
+  width: fit-content;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: ${tokens.spacing.space3};
 `;
 
 const Title = styled(H4)`
   color: ${tokens.colors.textPrimary};
   font-size: ${tokens.typography.sizes.h4};
   line-height: ${tokens.typography.lineHeight.h4};
-  white-space: nowrap;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 5px;
+  height: calc(${tokens.typography.lineHeight.h4} * 2);
+  min-height: calc(${tokens.typography.lineHeight.h4} * 2);
 `;
 
 const PointsText = styled(Text)`
@@ -64,7 +82,7 @@ const ProgressBar = styled.div`
   display: flex;
   align-items: center;
   gap: ${tokens.spacing.space2};
-  margin-top: 16px;
+  margin-top: auto;
 `;
 
 const ProgressTrack = styled.div`
@@ -81,7 +99,7 @@ const ProgressFill = styled.div<{ $progress: number }>`
   left: 0;
   top: 0;
   height: 100%;
-  width: ${({ $progress }: { $progress: number }) => `${$progress}%`};
+  width: ${({ $progress }) => `${$progress}%`};
   background: var(--gradient-rewards);
   border-radius: 2px;
   transition: width 0.3s ease;
@@ -91,6 +109,7 @@ const ProgressText = styled(Text)`
   color: ${tokens.colors.textSecondary};
   font-size: ${tokens.typography.sizes.small};
   line-height: ${tokens.typography.lineHeight.small};
+  white-space: nowrap;
 `;
 
 const StarWrapper = styled.div`
@@ -119,20 +138,26 @@ export const RewardCard: React.FC<RewardCardProps> = ({
       <StarWrapper>
         {isUnlocked ? (
           <StarIcon
-            sx={{ width: 28, height: 28, color: 'var(--gradient-end)' }}
+            sx={{ width: 28, height: 28, color: 'var(--gradient-start)' }}
           />
         ) : (
           <StarBorderIcon
-            sx={{ width: 28, height: 28, color: 'var(--gradient-end)' }}
+            sx={{ width: 28, height: 28, color: 'rgba(255, 255, 255, 0.5)' }}
           />
         )}
       </StarWrapper>
-      {isUnlocked && (
+      {isUnlocked ? (
         <UnlockedBadge>
           <Text variant="tiny" weight="bold">
             Unlocked!
           </Text>
         </UnlockedBadge>
+      ) : (
+        <LockedBadge>
+          <Text variant="tiny" weight="bold">
+            Locked
+          </Text>
+        </LockedBadge>
       )}
       <Title>{title}</Title>
       <PointsText>{points} Points</PointsText>
